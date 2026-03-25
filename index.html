@@ -366,8 +366,11 @@ function boot(){
   $('nc').textContent=curUser; $('nc').style.color=r.color;
   $('hdt').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
 
-  // Payer + split grid
+  // UPDATE THIS PART BELOW:
+  // Ensure it maps through all MATES, not just the current user
   $('fp').innerHTML=MATES.map(x=>`<option value="${x.name}"${x.name===curUser?' selected':''}>${x.name}</option>`).join('');
+  
+  // Also check the split grid to ensure all members are visible for splitting
   $('sg').innerHTML=MATES.map(x=>`<label><input type="checkbox" class="sc" name="sp" value="${x.name}" checked><div class="sp3">${x.name}</div></label>`).join('');
 
   signInAnonymously(auth).catch(e=>console.error('Auth:',e));
